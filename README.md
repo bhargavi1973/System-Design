@@ -1,4 +1,4 @@
-### 1. [UML Diagram for Student Management System](StudentManagementSystem.java)
+### 01. [UML Diagram for Student Management System](StudentManagementSystem.java)
 ##### 1(a). Before Applying SRP
 ```mermaid
 classDiagram
@@ -47,3 +47,5 @@ StudentManagement ..> ReportCardPrinter : provides student details
 StudentManagement ..> DatabaseServer : stores student data
 StudentManagement ..> EmailService : sends notification
 ```
+### 02. [Open Closed Principle](02-OCP)
+    
