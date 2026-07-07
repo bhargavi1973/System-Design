@@ -1,8 +1,8 @@
 import java.util.HashMap;
 import java.util.Map;
 
-// violation of SRP Principle
-/* class StudentManagement {
+//------------------------------------------------------------------------------- violation of SRP Principle
+class StudentManagement {
     private Map<Integer, String> students = new HashMap<>();
     String grade = null;
 
@@ -42,26 +42,12 @@ import java.util.Map;
         String studentName = students.get(rollNumber);
         System.out.println("---------sending email to :" + studentName);
     }
-} */
+} 
 
 
-```mermaid
-classDiagram
 
-class StudentManagement{
-    -Map~Integer,String~ students
-    -String grade
 
-    +addStudent(String name, int rollNumber)
-    +removeStudent(int rollNumber)
-    +calcGrade(int obtainedMarks, int rollNumber)
-    +printReportCard(int rollNumber)
-    +saveToDatabase(int rollNumber)
-    +sendEmail(int rollNumber)
-}
-```
-
-// refactored code adhering to SRP Principles
+// ----------------------------------------------------------------------------refactored code adhering to SRP Principles
 // Responsible only for managing students
 class StudentManagement {
 
@@ -138,16 +124,16 @@ class EmailService {
 }
 public class StudentManagementSystem{
     public static void main(String[] args){
-        // StudentManagement obj = new StudentManagement();
-        // obj.addStudent("Riya", 1);
-        // obj.addStudent("Rohit", 2);
-        // obj.calcGrade(95, 1);
-        // obj.printReportCard(1);
-        // obj.saveToDatabase(1);
-        // obj.sendEmail(1);
+        StudentManagement obj = new StudentManagement();
+        obj.addStudent("Riya", 1);
+        obj.addStudent("Rohit", 2);
+        obj.calcGrade(95, 1);
+        obj.printReportCard(1);
+        obj.saveToDatabase(1);
+        obj.sendEmail(1);
 
 
-        // Refractored code
+        // ----------------------------------------------------------------Refractored code for main function
         StudentManagement studentService = new StudentManagement();
         studentService.addStudent("Riya", 1);
         studentService.addStudent("Rohit", 2);
