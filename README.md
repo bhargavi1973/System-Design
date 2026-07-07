@@ -1,4 +1,4 @@
-### 1. UML Diagram for Student Management System 
+### 1. [UML Diagram for Student Management System](StudentManagementSystem.java)
 ##### 1(a). Before Applying SRP
 ```mermaid
 classDiagram
