@@ -4,23 +4,27 @@ interface PaymentService{
 }
 
 class CreditCardPayment implements PaymentService{
+    @Override
     public void pay(){
         System.out.println("Paying through Credit Card logic");
     }
 }
 class DebitCardPayment implements PaymentService{
+    @Override
     public void pay(){
         System.out.println("Paying through Debit Card logic");
     }
 }
 
 class UPIPayment implements PaymentService{
+    @Override
     public void pay(){
         System.out.println("Paying through UPI logic");
     }
 }
 
 class NetBankingPayment implements PaymentService{
+    @Override
     public void pay(){
         System.out.println("Paying through Net Banking logic");
     }
@@ -28,8 +32,9 @@ class NetBankingPayment implements PaymentService{
 
 // using a payment processor class, we don't need to explicitly know, the type of service user wants to use 
 class PaymentProcessor{
-  public void processPayment(PaymentMethod paymentMethod){
+  public void processPayment(PaymentService paymentMethod){
     paymentMethod.pay();
+  }
 }
   
 public class PaymentServiceSystem {
@@ -49,8 +54,8 @@ public class PaymentServiceSystem {
 
         //--------------with processor class-------
         PaymentProcessor processor = new PaymentProcessor();
-        processor.processPayment(new CreditCard());
-        processor.processPayment(new DebitCard());
+        processor.processPayment(new CreditCardPayment());
+        processor.processPayment(new DebitCardPayment());
         
     }
 }
