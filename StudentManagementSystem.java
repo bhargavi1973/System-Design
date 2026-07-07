@@ -44,6 +44,23 @@ import java.util.Map;
     }
 } */
 
+
+```mermaid
+classDiagram
+
+class StudentManagement{
+    -Map~Integer,String~ students
+    -String grade
+
+    +addStudent(String name, int rollNumber)
+    +removeStudent(int rollNumber)
+    +calcGrade(int obtainedMarks, int rollNumber)
+    +printReportCard(int rollNumber)
+    +saveToDatabase(int rollNumber)
+    +sendEmail(int rollNumber)
+}
+```
+
 // refactored code adhering to SRP Principles
 // Responsible only for managing students
 class StudentManagement {
