@@ -1,7 +1,6 @@
-Before LSP
+## Before LSP
 ```mermaid
 classDiagram
-
 direction LR
 
 class BankAccount {
@@ -26,23 +25,16 @@ class FixedDepositeAccount {
 }
 
 class BankService {
-    +performTransaction(account : BankAccount)
+    +performTransaction(account: BankAccount)
 }
 
-BankAccount <|.. SavingsAccount : implements
-BankAccount <|.. CurrentAccount : implements
-BankAccount <|.. FixedDepositeAccount : implements
+BankAccount <|.. SavingsAccount
+BankAccount <|.. CurrentAccount
+BankAccount <|.. FixedDepositeAccount
 
 BankService --> BankAccount : uses
-
-note for FixedDepositeAccount
-withdraw() throws
-UnsupportedOperationException
-LSP Violation
-end note
 ```
-
-After LSP
+## After LSP
 ```mermaid
 classDiagram
 
@@ -77,11 +69,11 @@ class BankService {
     +performTransaction(account : Withdrawable)
 }
 
-NonWithdrawable <|-- Withdrawable
 
 Withdrawable <|.. SavingsAccount : implements
 Withdrawable <|.. CurrentAccount : implements
 NonWithdrawable <|.. FixedDepositAccount : implements
+NonWithdrawable <|.. Withdrawable : extends
 
 BankService --> NonWithdrawable : deposit()
 BankService --> Withdrawable : withdraw()
