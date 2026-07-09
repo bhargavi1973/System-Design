@@ -50,3 +50,4 @@ StudentManagement ..> EmailService : sends notification
 ### 02. [Open Closed Principle](02-OCP)
 ### 03. [Liskov Substitution Principle](03-LSP)
 ### 04. [Interface Seggregation Principle](04-ISP)
+### 05. [Dependency Inversion Principle](05-DIP)
