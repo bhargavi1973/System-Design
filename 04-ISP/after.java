@@ -29,7 +29,7 @@ public class after {
         Shape3D s2 = new cube();
 
         s1.area();
-        s1.volume();  // throws a cannot find symbol error because volume() method is not defined in Shape2D interface
+        s1.volume();  // throws Compile time error
 
         s2.area();
         s2.volume();
