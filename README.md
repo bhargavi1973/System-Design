@@ -48,4 +48,4 @@ StudentManagement ..> DatabaseServer : stores student data
 StudentManagement ..> EmailService : sends notification
 ```
 ### 02. [Open Closed Principle](02-OCP)
-    
+### 03. [Liskov Substitution Principle](03-LSP)
