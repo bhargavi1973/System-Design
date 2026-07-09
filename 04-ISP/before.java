@@ -38,7 +38,7 @@ public class before {
         Shapes s2 = new Cube();
 
         s1.area();
-        s1.volume(); // this will thrown an exception
+        s1.volume(); // throws Runtime Error
 
         s2.area();
         s2.volume();
