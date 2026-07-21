@@ -1,4 +1,4 @@
-// PHASE 1 : Monolithic DocumentEditor
+// PHASE 1 : Monolithic DocumentEditor : A single document editor class contains all the functions
 
 class Document{
     void createDocument(){
