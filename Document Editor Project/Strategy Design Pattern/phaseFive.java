@@ -1,0 +1,199 @@
+// PHASE 5
+// introducing Strategy Pattern
+
+class DocumentManager{
+    private Storage storage;
+    private Exporter exporter;
+    private Printer printer;
+    private SpellChecker spellChecker;
+
+    // Constructor Injection
+    public DocumentManager(Storage storage,
+                           Exporter exporter,
+                           Printer printer,
+                           SpellChecker spellChecker) {
+
+        this.storage = storage;
+        this.exporter = exporter;
+        this.printer = printer;
+        this.spellChecker = spellChecker;
+    }
+    
+    void setStorage(Storage storage){
+        this.storage = storage;
+    }
+    void setExporter(Exporter exporter){
+        this.exporter = exporter;
+    }
+
+    void saveDocument(Document doc){
+        storage.save(doc);
+    }
+    Document loadDocument(String title){
+        return storage.load(title);
+    }
+
+    void exportDocument(Document doc){
+        exporter.export(doc);
+    }
+
+    void printDocument(Document doc){
+        printer.print(doc);
+    }
+    void spellCheckDocument(Document doc){
+        spellChecker.checkSpelling(doc);
+    }
+
+}
+class Document{
+    private String title;
+    private String content;
+    private String author;
+
+    Document(String title, String author){
+        this.title = title;
+        this.author = author;
+        this.content = "";
+    }
+
+    public void appendText(String text){
+        if(text != null && !text.isBlank()) {
+            content += text;
+        }
+    }
+    
+    public void deleteText(int startIndex, int endIndex){
+
+        if (startIndex >= 0 && endIndex <= content.length() && startIndex < endIndex) {
+            content = content.substring(0, startIndex) + content.substring(endIndex);
+        }
+    }
+    
+    public String getTitle(){
+        return title;
+    }
+    public String getContent() {
+        return content;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+}
+
+class DocumentEditor{
+   
+    void addText(Document doc, String text){
+        doc.appendText(text);
+    }
+
+    void deleteText(Document doc, int startIndex, int endIndex){
+        doc.deleteText(startIndex, endIndex);
+    }
+}
+
+interface Storage{
+    void save(Document doc);
+    Document load(String title);
+}
+class FileStorage implements Storage{
+    @Override
+    public void save(Document doc){
+        System.out.println("saving document in doc file....");
+    }
+
+    @Override
+    public Document load(String title){
+        System.out.println("loading document: " + title);
+        return new Document(title, "Author Name");
+    }
+}
+class CloudStorage implements Storage{
+    @Override
+    public void save(Document doc){
+        System.out.println("saving in cloud storage...");
+    }
+    @Override
+    public Document load(String title){
+        System.out.println("loading document: " + title);
+        return new Document(title, "Author Name");
+    }
+}
+
+interface Exporter{
+    void export(Document doc);
+}
+class PDFExporter implements Exporter{
+    @Override
+    public void export(Document doc){
+        System.out.println("exporting document to PDF...");
+    }
+}
+class HTMLExporter implements Exporter{
+    @Override
+    public void export(Document doc){
+        System.out.println("exporting documnet as HTML markeup file...");
+    }
+}
+class MarkdownExporter implements Exporter{
+    @Override
+    public void export(Document doc){
+        System.out.println("Exporting document as Markdown...");
+    }
+}
+
+class Printer{
+    void print(Document doc){
+        System.out.println("printing document.....");
+    }
+}
+
+class SpellChecker{
+    void checkSpelling(Document doc){
+        System.out.println("chceking spelling in document...");
+    }
+}
+
+public class phaseFive {
+    public static void main(String[] args) {
+        // Create dependencies
+        Storage storage = new FileStorage();
+        Exporter exporter = new PDFExporter();
+        Printer printer = new Printer();
+        SpellChecker spellChecker = new SpellChecker();
+
+        // Inject dependencies
+        DocumentManager manager =
+                new DocumentManager(storage, exporter, printer, spellChecker);
+       
+        // create document
+        Document doc = new Document("New Document", "Author Name");
+
+        // create error
+        DocumentEditor editor = new DocumentEditor();
+        editor.addText(doc, "\nHello SOLID Principles!");
+        
+        // default storage and export
+        manager.exportDocument(doc);
+        manager.saveDocument(doc);
+
+        // ---- PHASE 5 Changes ----
+        manager.setExporter(new HTMLExporter());
+        manager.exportDocument(doc);
+
+
+        manager.setExporter(new MarkdownExporter());
+        manager.exportDocument(doc);
+        
+        manager.setStorage(new CloudStorage());
+        manager.saveDocument(doc);
+
+        manager.printDocument(doc);
+        manager.spellCheckDocument(doc);
+
+        Document loadedDoc = manager.loadDocument("New Document");
+
+        System.out.println("Loaded Document Title: " + loadedDoc.getTitle());
+    }
+}
+
