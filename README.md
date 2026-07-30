@@ -51,4 +51,4 @@ StudentManagement ..> EmailService : sends notification
 ### 03. [Liskov Substitution Principle](03-LSP)
 ### 04. [Interface Seggregation Principle](04-ISP)
 ### 05. [Dependency Inversion Principle](05-DIP)
-### 06. [Document Editor Project](Document Editor Project)
+### 06. [Document Editor Project](DocumentEditorProject)
